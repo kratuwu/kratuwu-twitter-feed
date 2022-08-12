@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { FirestoreModule } from './firestore/firestore.module';
 import { TwitterModule } from './twitter/twitter.module';
 
 @Module({
@@ -18,6 +19,15 @@ import { TwitterModule } from './twitter/twitter.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) =>
         configService.get('TWITTER_BEARER_TOKEN'),
+      imports: [ConfigModule],
+    }),
+    FirestoreModule.forRoot({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        projectId: configService.get('GCP_PROJECT_ID'),
+        clientEmail: configService.get('GOOGLE_CLIENT_EMAIL'),
+        privateKey: configService.get('GOOGLE_PRIVATE_KEY'),
+      }),
       imports: [ConfigModule],
     }),
   ],
