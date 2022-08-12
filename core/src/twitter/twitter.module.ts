@@ -1,5 +1,4 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import Client from 'twitter-api-sdk';
 import { TwitterApiProvider } from './twitter.providers';
 import { TwitterService } from './twitter.service';
 type TwitterModuleOptions = {
