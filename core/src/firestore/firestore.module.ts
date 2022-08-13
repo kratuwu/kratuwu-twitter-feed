@@ -23,15 +23,14 @@ export class FirestoreModule {
     };
     const dbProvider = {
       provide: FirestoreDatabaseProvider,
-      useFactory: (config: FirestoreCredentials) => {
-        return new Firestore({
+      useFactory: (config: FirestoreCredentials) =>
+        new Firestore({
           projectId: config.projectId,
           credentials: {
             client_email: config.clientEmail,
             private_key: config.privateKey?.replace(/\\n/g, '\n'),
           },
-        });
-      },
+        }),
       inject: [FirestoreOptionsProvider],
     };
     const collectionProviders = FirestoreCollectionProviders.map(
