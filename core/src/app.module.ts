@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FirestoreModule } from './firestore/firestore.module';
 import { TwitterModule } from './twitter/twitter.module';
+import { TweetModule } from './tweet/tweet.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { TwitterModule } from './twitter/twitter.module';
       }),
       imports: [ConfigModule],
     }),
+    TweetModule,
   ],
   controllers: [AppController],
   providers: [AppService],

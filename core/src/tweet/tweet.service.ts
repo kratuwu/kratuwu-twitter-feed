@@ -6,15 +6,19 @@ import {
   components,
 } from 'twitter-api-sdk/dist/types';
 import TweetDTO from './tweet.dto';
+import { LastTweetQueryRepository } from './lastQuery.repository';
 @Injectable()
 export class TweetService {
-  constructor(private readonly tweetRepository: TweetRepository) {}
+  constructor(
+    private readonly tweetRepository: TweetRepository,
+    private readonly lastTweetQueryRepository: LastTweetQueryRepository,
+  ) {}
 
-  public saveRecentTweet(
+  public async saveRecentTweet(
     tweets: TwitterResponse<tweetsRecentSearch>,
     query: string,
   ) {
-    const tweetsDto: TweetDTO[] = tweets.data.map(
+    const tweetsDto: TweetDTO[] = tweets.data?.map(
       ({ id, text, author_id, attachments }) => ({
         id,
         query,
@@ -27,15 +31,25 @@ export class TweetService {
         }),
       }),
     );
-    this.tweetRepository.create(tweetsDto);
+    await this.tweetRepository.create(tweetsDto);
+    return await this.lastTweetQueryRepository.saveLastTweetQueryDocument(
+      query,
+      tweets.data?.[0].created_at,
+    );
   }
-
+  public getLastQueryCreatedAt(query: string): Promise<string> {
+    return this.lastTweetQueryRepository.getLastQueryCreatedAt(query);
+  }
+  public countByQuery(query: string): Promise<number> {
+    return this.tweetRepository.countByQuery(query);
+  }
   private findAuthorName(
     users: components['schemas']['User'][],
     userId: string,
   ) {
     return users.find((user) => userId === user.id).name;
   }
+
   private findMediaByKey(
     key: string,
     medias: components['schemas']['Media'][],

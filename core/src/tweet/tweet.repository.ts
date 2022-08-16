@@ -13,18 +13,32 @@ export class TweetRepository {
     private firestore: Firestore,
   ) {}
 
-  async create(tweetsDto: TweetDTO[]): Promise<TweetDTO[]> {
-    const batch = this.firestore.batch();
-    await Promise.all(
-      tweetsDto.map(async (tweet) => {
-        const existsTweet = await this.findTweetById(tweet.id);
-        if (!existsTweet) batch.create(this.tweetCollection.doc(), tweet);
+  async create(tweetsDto: TweetDTO[] = []) {
+    const tweetsBatch: TweetDTO[][] = [];
+    while (tweetsDto.length > 0) {
+      const chunk = tweetsDto.splice(0, 500);
+      tweetsBatch.push(chunk);
+    }
+    return await Promise.all(
+      tweetsBatch.map(async (tweets) => {
+        const bulk = this.firestore.bulkWriter();
+        await Promise.all(
+          tweets.map(async (tweet) => {
+            const existsTweet = await this.findTweetById(tweet.id);
+            if (!existsTweet) bulk.create(this.tweetCollection.doc(), tweet);
+          }),
+        );
+        await bulk.flush();
       }),
     );
-    await batch.commit();
-    return tweetsDto;
   }
 
+  public async countByQuery(query: string) {
+    return this.tweetCollection
+      .where('query', '==', query)
+      .get()
+      .then((tweets) => tweets.size);
+  }
   private async findTweetById(email: string) {
     return await this.getFirst(this.tweetCollection.where('id', '==', email));
   }
