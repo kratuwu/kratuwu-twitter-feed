@@ -9,7 +9,7 @@ export class TweetDTO {
 
   public authorId: string;
 
-  public authorName: string;
+  public authorUsername: string;
 
   public text: string;
 

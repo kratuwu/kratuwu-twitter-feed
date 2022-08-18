@@ -24,7 +24,10 @@ export class TweetService {
         query,
         authorId: author_id,
         text,
-        authorName: this.findAuthorName(tweets.includes.users, author_id),
+        authorUsername: this.findAuthorUserName(
+          tweets.includes.users,
+          author_id,
+        ),
         mediaUrls: attachments.media_keys.map((key) => {
           const { type, url } = this.findMediaByKey(key, tweets.includes.media);
           return { type, url };
@@ -43,11 +46,11 @@ export class TweetService {
   public countByQuery(query: string): Promise<number> {
     return this.tweetRepository.countByQuery(query);
   }
-  private findAuthorName(
+  private findAuthorUserName(
     users: components['schemas']['User'][],
     userId: string,
   ) {
-    return users.find((user) => userId === user.id).name;
+    return users.find((user) => userId === user.id).username;
   }
 
   private findMediaByKey(
