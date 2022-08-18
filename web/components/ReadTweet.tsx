@@ -1,15 +1,13 @@
 import {
-  doc,
   collection,
   onSnapshot,
   query,
-  where,
-  getDocs,
   DocumentData,
+  orderBy,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebase/initFirebase";
-const q = query(collection(db, "tweet"), where("query", "==", "#ミドリーズ"));
+const q = query(collection(db, "tweet"), orderBy("createdAt"));
 const ReadDataFromCloudFirestore = () => {
   const [data, setData] = useState<DocumentData[]>([]);
   useEffect(() => {
@@ -21,10 +19,15 @@ const ReadDataFromCloudFirestore = () => {
   }, []);
 
   return (
-    <div style={{ margin: "5px 0" }}>
-      {data.map((data: any) => (
-        <div key={data.id}>{data.authorId}</div>
-      ))}
+    <div style={{ margin: "5px 0" }} className="p-10">
+      <div className="flex flex-wrap">
+        {data.map((data) => (
+          <div key={data.id} className="w-1/4 mb-10">
+            <div className="font-bold text-xl mb-2">{data.authorUsername}</div>
+            <p className="text-gray-700 text-base">{data.text}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
