@@ -14,5 +14,7 @@ export class TweetDTO {
   public text: string;
 
   public mediaUrls: MediaInterface[];
+
+  public createdAt: number;
 }
 export default TweetDTO;

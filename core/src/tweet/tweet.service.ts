@@ -19,7 +19,7 @@ export class TweetService {
     query: string,
   ) {
     const tweetsDto: TweetDTO[] = tweets.data?.map(
-      ({ id, text, author_id, attachments }) => ({
+      ({ id, text, author_id, attachments, created_at }) => ({
         id,
         query,
         authorId: author_id,
@@ -32,6 +32,7 @@ export class TweetService {
           const { type, url } = this.findMediaByKey(key, tweets.includes.media);
           return { type, url };
         }),
+        createdAt: Date.parse(created_at),
       }),
     );
     await this.tweetRepository.create(tweetsDto);
