@@ -49,7 +49,7 @@ const ReadDataFromCloudFirestore = () => {
                   </h5>
                 </div>
                 <div
-                  className="border border-4 shadow-md "
+                  className="border border-4 shadow-md bg-gradient-to-b from-blue to-turquoise"
                   style={{ borderStyle: "inset" }}
                 >
                   <Image
@@ -60,7 +60,7 @@ const ReadDataFromCloudFirestore = () => {
                     width="100%"
                     height="60"
                     layout="responsive"
-                    objectFit="cover"
+                    objectFit="contain"
                   />
                 </div>
                 <p className="text-gray-500 text-xs p-4 text-purple">
