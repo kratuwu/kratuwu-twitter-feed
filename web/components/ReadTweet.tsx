@@ -19,12 +19,12 @@ const ReadDataFromCloudFirestore = () => {
       const stack = [];
       let start = 0;
       for (let i = 0; i < 3; i++) {
-        console.log(start);
         stack[i] = data.slice(start, start + perRow);
         start += perRow;
       }
       for (let i = 0; i < portion; i++) {
-        stack[i].push(data[i]);
+        stack[i].push(data[start]);
+        start++;
       }
       setData(stack);
     });
@@ -40,21 +40,32 @@ const ReadDataFromCloudFirestore = () => {
             {group.map((tweet) => (
               <li
                 key={tweet.id}
-                className="text-sm leading-6 rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700"
+                className="text-sm leading-6 border border-4 shadow-md bg-lpink"
+                style={{ borderStyle: "outset" }}
               >
-                <Image
-                  src={tweet.mediaUrls[0].url}
-                  alt=""
-                  title=""
-                  width="100%"
-                  height="60"
-                  layout="responsive"
-                  objectFit="cover"
-                />
-                <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-                  {tweet.authorUsername}
-                </h5>
-                <p className="text-gray-500 text-xs">{tweet.text}</p>
+                <div className="bg-gradient-to-r from-indigo-700 to-fuchsia-400 px-3">
+                  <h5 className="text-base text-white md:text-xl dark:text-white font-light">
+                    {tweet.authorUsername}
+                  </h5>
+                </div>
+                <div
+                  className="border border-4 shadow-md "
+                  style={{ borderStyle: "inset" }}
+                >
+                  <Image
+                    src={tweet.mediaUrls[0].url}
+                    className="border border-4 p2"
+                    alt=""
+                    title=""
+                    width="100%"
+                    height="60"
+                    layout="responsive"
+                    objectFit="cover"
+                  />
+                </div>
+                <p className="text-gray-500 text-xs p-4 text-purple">
+                  {tweet.text}
+                </p>
               </li>
             ))}
           </ul>
