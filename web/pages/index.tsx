@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <main
-        className="bg-[url('/img/bg.png')] no-repeat"
+        className="bg-[url('/img/bg.png')] no-repeat pt-10"
         style={{
           backgroundSize: "auto 100%",
           backgroundAttachment: "fixed",
@@ -13,15 +13,15 @@ const Home: NextPage = () => {
         }}
       >
         <header>
-          <h1 className="text-6xl text-hpink text-center text-white">
+          <h1 className="text-5xl text-hpink text-center text-white">
             1st FAN MEET
           </h1>
           <h2 className="text-4xl text-center leading-14">
-            YOASOBI Thailand Fanclub
+            Yoasobi Thailand Fanclub
           </h2>
-          <h2 className="text-xl font-semibold text-center leading-14 text-hpink">
+          <h4 className="text-l font-semibold text-center leading-14 text-hpink">
             #NICETOMEETUP
-          </h2>
+          </h4>
         </header>
         <ReadDataFromCloudFirestore />
       </main>
