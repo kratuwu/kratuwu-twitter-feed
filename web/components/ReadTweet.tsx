@@ -33,7 +33,7 @@ const ReadDataFromCloudFirestore = () => {
   }, []);
 
   return (
-    <div className="px-10">
+    <div className="px-10 py-6">
       <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {data.map((group, i) => (
           <ul key={i + "list"} className="space-y-8">
