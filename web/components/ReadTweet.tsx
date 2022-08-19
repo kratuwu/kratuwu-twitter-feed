@@ -5,7 +5,6 @@ import {
   DocumentData,
   orderBy,
 } from "firebase/firestore";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebase/initFirebase";
 import Tweet from "./Tweet";
@@ -39,7 +38,7 @@ const ReadDataFromCloudFirestore = () => {
         {data.map((group, i) => (
           <ul key={i + "list"} className="space-y-8">
             {group.map((tweet) => (
-              <Tweet tweet={tweet} key={tweet.key} />
+              <Tweet tweet={tweet} key={tweet.id} />
             ))}
           </ul>
         ))}
