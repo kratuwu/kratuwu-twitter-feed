@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db } from "../utils/firebase/initFirebase";
+import Tweet from "./Tweet";
 const q = query(collection(db, "tweet"), orderBy("createdAt", "desc"));
 const ReadDataFromCloudFirestore = () => {
   const [data, setData] = useState<DocumentData[][]>([]);
@@ -38,35 +39,7 @@ const ReadDataFromCloudFirestore = () => {
         {data.map((group, i) => (
           <ul key={i + "list"} className="space-y-8">
             {group.map((tweet) => (
-              <li
-                key={tweet.id}
-                className="text-sm leading-6 border border-4 shadow-md bg-lpink"
-                style={{ borderStyle: "outset" }}
-              >
-                <div className="bg-gradient-to-r from-indigo-700 to-fuchsia-400 px-3">
-                  <h5 className="text-base text-white md:text-xl dark:text-white font-light">
-                    {tweet.authorUsername}
-                  </h5>
-                </div>
-                <div
-                  className="border border-4 shadow-md bg-gradient-to-b from-blue to-turquoise"
-                  style={{ borderStyle: "inset" }}
-                >
-                  <Image
-                    src={tweet.mediaUrls[0].url}
-                    className="border border-4 p2"
-                    alt=""
-                    title=""
-                    width="100%"
-                    height="60"
-                    layout="responsive"
-                    objectFit="contain"
-                  />
-                </div>
-                <p className="text-gray-500 text-s p-4 font-medium text-purple">
-                  {tweet.text}
-                </p>
-              </li>
+              <Tweet tweet={tweet} key={tweet.key} />
             ))}
           </ul>
         ))}
