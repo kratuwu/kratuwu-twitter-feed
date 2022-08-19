@@ -63,7 +63,7 @@ const ReadDataFromCloudFirestore = () => {
                     objectFit="contain"
                   />
                 </div>
-                <p className="text-gray-500 text-xs p-4 text-purple">
+                <p className="text-gray-500 text-s p-4 font-medium text-purple">
                   {tweet.text}
                 </p>
               </li>

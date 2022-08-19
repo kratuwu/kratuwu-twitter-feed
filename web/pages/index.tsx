@@ -6,7 +6,11 @@ const Home: NextPage = () => {
     <div>
       <main
         className="bg-[url('/img/bg.png')] no-repeat"
-        style={{ backgroundSize: "auto 100%", backgroundAttachment: "fixed" }}
+        style={{
+          backgroundSize: "auto 100%",
+          backgroundAttachment: "fixed",
+          minHeight: "100vh",
+        }}
       >
         <header>
           <h1 className="text-6xl text-hpink text-center text-white">
