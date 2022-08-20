@@ -3,7 +3,6 @@ import Image from "next/image";
 import React from "react";
 
 const Tweet = ({ tweet }: DocumentData) => {
-    console.log(tweet)
   return (
     <li className="text-sm leading-6 border border-2 border-r-neutral-500 border-b-neutral-500 p-1 bg-white ">
       <div className="bg-gradient-to-r from-indigo-700 to-fuchsia-400 px-3 mb-1">
