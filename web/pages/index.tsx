@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
+import { useState } from "react";
 import ReadDataFromCloudFirestore from "../components/ReadTweet";
 
 const Home: NextPage = () => {
+  const [isRandom, setIsRandom] = useState(false);
   return (
     <div>
       <main
@@ -19,11 +21,19 @@ const Home: NextPage = () => {
           <h2 className="text-4xl text-center leading-14">
             Yoasobi Thailand Fanclub
           </h2>
-          <h4 className="text-l font-semibold text-center leading-14 text-hpink">
+          <h4 className="text-xl font-semibold text-center leading-14 text-hpink">
             #NICETOMEETUP
           </h4>
+          {isRandom || (
+            <button
+              className="text-2xl text-neutral-700 font-bold py-2 px-4 border border-2 border-r-neutral-500 border-b-neutral-500 p-1 bg-white"
+              onClick={() => setIsRandom(true)}
+            >
+              Random
+            </button>
+          )}
         </header>
-        <ReadDataFromCloudFirestore />
+        <ReadDataFromCloudFirestore isRandom={isRandom}/>
       </main>
 
       <footer></footer>
