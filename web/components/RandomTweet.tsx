@@ -6,7 +6,6 @@ import Tweet from "./Tweet";
 const RandomTweet = (props: { tweet: DocumentData }) => {
   const [seconds, setSeconds] = useState(5);
   useEffect(() => {
-    console.log(props.tweet)
     let myInterval = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
