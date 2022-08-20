@@ -30,7 +30,7 @@ const RandomTweet = (props: { tweet: DocumentData }) => {
           {seconds}
         </div>
       ) : (
-        <ul className="list-disc">
+        <ul className="list-none">
           <Tweet tweet={props.tweet} />
         </ul>
       )}
