@@ -5,7 +5,7 @@ import {
   DocumentData,
   orderBy,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { db } from "../utils/firebase/initFirebase";
 import RandomTweet from "./RandomTweet";
 import Tweet from "./Tweet";
@@ -16,18 +16,12 @@ const ReadDataFromCloudFirestore = (props: { isRandom: boolean }) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(q, (snap) => {
       const data = snap.docs.map((doc) => doc.data());
-      const portion = data.length % 3;
-      const perRow = Math.floor(data.length / 3);
-      const stack = [];
-      let start = 0;
-      for (let i = 0; i < 3; i++) {
-        stack[i] = data.slice(start, start + perRow);
-        start += perRow;
-      }
-      for (let i = 0; i < portion; i++) {
-        stack[i].push(data[start]);
-        start++;
-      }
+      const stack: SetStateAction<DocumentData[][]> = [[], [], []];
+      let current = 0;
+      data.forEach((tweet) => {
+        stack[current].push(tweet);
+        current = (current + 1) % 3;
+      });
       setData(stack);
     });
 
