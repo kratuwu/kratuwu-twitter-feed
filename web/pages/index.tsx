@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import RandomButton from "../components/RandomButton";
 import ReadDataFromCloudFirestore from "../components/ReadTweet";
 
 const Home: NextPage = () => {
@@ -24,16 +25,7 @@ const Home: NextPage = () => {
           <h4 className="text-xl font-semibold text-center leading-14 text-hpink">
             #NICETOMEETUP
           </h4>
-          {isRandom || (
-            <div className="px-10 sm:w-full ">
-              <button
-                className="text-2xl text-neutral-600 py-2 px-4 border border-2 border-r-neutral-500 border-b-neutral-500 p-1 bg-yellow-200 md:absolute top-0 right-0 w-full md:w-auto md:m-10"
-                onClick={() => setIsRandom(true)}
-              >
-                Random
-              </button>
-            </div>
-          )}
+          {isRandom || <RandomButton onClick={() => setIsRandom(true)} />}
         </header>
         <ReadDataFromCloudFirestore isRandom={isRandom} />
       </main>

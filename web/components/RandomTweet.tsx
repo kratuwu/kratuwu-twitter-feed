@@ -1,5 +1,4 @@
 import { DocumentData } from "firebase/firestore";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Tweet from "./Tweet";
 
