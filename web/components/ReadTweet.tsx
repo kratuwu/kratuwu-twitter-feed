@@ -16,11 +16,11 @@ const ReadDataFromCloudFirestore = (props: { isRandom: boolean }) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(q, (snap) => {
       const data = snap.docs.map((doc) => doc.data());
-      const stack: SetStateAction<DocumentData[][]> = [[], [], []];
+      const stack: SetStateAction<DocumentData[][]> = [[], [], [], []];
       let current = 0;
       data.forEach((tweet) => {
         stack[current].push(tweet);
-        current = (current + 1) % 3;
+        current = (current + 1) % 4;
       });
       setData(stack);
     });
@@ -35,7 +35,7 @@ const ReadDataFromCloudFirestore = (props: { isRandom: boolean }) => {
     <RandomTweet tweet={randomTweet} />
   ) : (
     <div className="px-10 py-6">
-      <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {data.map((group, i) => (
           <ul key={i + "list"} className="space-y-8">
             {group.map((tweet) => (
