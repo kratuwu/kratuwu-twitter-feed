@@ -38,7 +38,7 @@ export class TweetService {
     await this.tweetRepository.create(tweetsDto);
     return await this.lastTweetQueryRepository.saveLastTweetQueryDocument(
       query,
-      tweets.data?.[0].created_at,
+      tweets.data?.[0]?.created_at,
     );
   }
   public getLastQueryCreatedAt(query: string): Promise<string> {
