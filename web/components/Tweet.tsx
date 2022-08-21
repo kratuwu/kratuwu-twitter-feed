@@ -4,7 +4,7 @@ import React from "react";
 
 const Tweet = ({ tweet }: DocumentData) => {
   return (
-    <li className="text-sm leading-6 border border-2 border-r-neutral-500 border-b-neutral-500 p-1 bg-white ">
+    <li className="text-sm leading-6 border border-2 border-r-neutral-500 border-b-neutral-500 p-1 bg-zinc-50 ">
       <div className="bg-gradient-to-r from-indigo-700 to-fuchsia-400 px-3 mb-1">
         <h5 className="text-base text-white md:text-xl dark:text-white font-light">
           {tweet.authorUsername}
@@ -22,8 +22,8 @@ const Tweet = ({ tweet }: DocumentData) => {
           objectFit="contain"
         />
       </div>
-      <div className="bg-lpink ">
-        <p className="text-gray-500 text-s p-4 font-medium text-purple">
+      <div >
+        <p className="text-gray-500 text-s p-4 font-medium ">
           {tweet.text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, "")}
         </p>
       </div>
