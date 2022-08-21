@@ -22,10 +22,14 @@ const Home: NextPage = () => {
           <h2 className="text-4xl text-center leading-14">
             Yoasobi Thailand Fanclub
           </h2>
-          <h4 className="text-xl font-semibold text-center leading-14 text-hpink">
-            #NICETOMEETUP
-          </h4>
-          {isRandom || <RandomButton onClick={() => setIsRandom(true)} />}
+          <div className="flex justify-center">
+            <p className="text-xl font-semibold text-center leading-14 text-hpink mx-5">
+              #YOASOBITH
+            </p>
+            <p className="text-xl font-semibold text-center leading-14 text-fuchsia-400 mx-5">
+              #NICETOMEETUP
+            </p>
+          </div>
         </header>
         <ReadDataFromCloudFirestore isRandom={isRandom} />
       </main>
