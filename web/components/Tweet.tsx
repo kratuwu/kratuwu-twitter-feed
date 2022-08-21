@@ -24,7 +24,7 @@ const Tweet = ({ tweet }: DocumentData) => {
       </div>
       <div className="bg-lpink ">
         <p className="text-gray-500 text-s p-4 font-medium text-purple">
-          {tweet.text}
+          {tweet.text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, "")}
         </p>
       </div>
     </li>
