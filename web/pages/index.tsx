@@ -30,6 +30,7 @@ const Home: NextPage = () => {
               #NICETOMEETUP
             </p>
           </div>
+          {isRandom || <RandomButton onClick={() => setIsRandom(true)} />}
         </header>
         <ReadDataFromCloudFirestore isRandom={isRandom} />
       </main>
